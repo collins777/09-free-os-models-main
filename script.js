@@ -59,7 +59,9 @@ document.getElementById("routineForm").addEventListener("submit", async (e) => {
     });
 
   // Create prompt for personalized routine
-  const prompt = `Please create a personalized ${timeOfDay.toLowerCase()} routine for me with the following parameters:
+  const prompt = `You are a helpful assistant that creates quick, focused daily routines. Always keep routines short, realistic, and tailored to the user's preferences.
+
+Please create a personalized ${timeOfDay.toLowerCase()} routine for me with the following parameters:
 - Focus area: ${focusArea}
 - Time available: ${timeAvailable} minutes
 - Energy level: ${energyLevel}
@@ -89,13 +91,7 @@ Format the routine with time allocations for each step.`;
       },
       body: JSON.stringify({
         model: "mistral-small-latest",
-        messages: [
-          {
-            role: "system",
-            content: `You are a helpful assistant that creates quick, focused daily routines. Always keep routines short, realistic, and tailored to the user's preferences.`,
-          },
-          { role: "user", content: prompt },
-        ],
+        messages: [{ role: "user", content: prompt }],
         temperature: 0.7,
         max_tokens: 500,
       }),
